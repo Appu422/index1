@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Light cyan background */
+    color: #333; /* Dark grey font color */
+}
+header {
+    background-color: #00796b; /* Teal background */
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff; /* White background for main content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+#login-form, #user-dashboard {
+    margin-bottom: 2rem;
+}
+#login-form h2, #user-dashboard h2, #feed h2 {
+    margin-bottom: 1rem;
+    color: #00796b; /* Teal color for headings */
+}
+input, textarea, button {
+    margin: 0.5rem; 
+    padding: 0.3rem;
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners */
+    color: #333; /* Dark grey font color */
+}
+button {
+    background-color: #00796b; /* Teal background */
+    color: #fff;
+    border: none; 
+    cursor: pointer;
+    padding: 0.5rem 1rem; /* More padding for better appearance */
+    border-radius: 4px; /* Rounded corners */
+}
+button:hover {
+    background-color: #004d40; /* Darker teal on hover */
+}
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+li {
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff; /* White background for list items */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #333; /* Dark grey font color */
+}
+li p {
+    margin: 0;
+}
