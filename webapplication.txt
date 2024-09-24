@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classified Ads</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Classified Ads</h1>
+        <nav>
+            <a href="#add-item">Add Item</a>
+            <a href="#item-list">Items</a>
+        </nav>
+    </header>
+
+    <section id="add-item">
+        <h2>Add Your Item</h2>
+        <form id="item-form">
+            <input type="text" id="item-name" placeholder="Item Name" required>
+            <input type="text" id="item-price" placeholder="Price" required>
+            <textarea id="item-description" placeholder="Description" required></textarea>
+            <button type="submit">Add Item</button>
+        </form>
+    </section>
+
+    <section id="item-list">
+        <h2>Available Items</h2>
+        <div id="items-container"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+.item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+document.getElementById('item-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('item-name').value;
+    const price = document.getElementById('item-price').value;
+    const description = document.getElementById('item-description').value;
+
+    const item = {
+        name,
+        price,
+        description
+    };
+
+    addItemToList(item);
+    this.reset(); 
+});
+
+function addItemToList(item) {
+    const container = document.getElementById('items-container');
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('item');
+    itemDiv.innerHTML = `
+        <h3>${item.name}</h3>
+        <p>Price: $${item.price}</p>
+        <p>${item.description}</p>
+    `;
+    container.appendChild(itemDiv);
+}
