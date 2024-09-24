@@ -32,9 +32,7 @@ document.getElementById('post-btn').addEventListener('click', function() {
         newPost.querySelector('.share-btn').addEventListener('click', function() {
             alert('Post shared!');
         });
-        newPost.queryselector<'.like-btn').addEventListener<'click',function(){
-            const like =prompt("enter like:");
-});
+        
         newPost.querySelector('.emoji-btn').addEventListener('click', function() {
             const emoji = prompt("Enter emoji:");
             newPost.querySelector('p').innerHTML += ` ${emoji}`;
