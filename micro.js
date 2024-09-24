@@ -15,6 +15,7 @@ document.getElementById('post-btn').addEventListener('click', function() {
         newPost.innerHTML = `
             <p>${postContent}</p>
             <button class="share-btn">Share</button>
+            <button class="like-btn">Like</button>
             <button class="emoji-btn">😊</button>
             <button class="comment-btn">Comment</button>
             <div class="comments" style="display: none;">
@@ -31,7 +32,9 @@ document.getElementById('post-btn').addEventListener('click', function() {
         newPost.querySelector('.share-btn').addEventListener('click', function() {
             alert('Post shared!');
         });
-
+        newPost.queryselector<'.like-btn').addEventListener<'click',function(){
+            const like =prompt("enter like:");
+});
         newPost.querySelector('.emoji-btn').addEventListener('click', function() {
             const emoji = prompt("Enter emoji:");
             newPost.querySelector('p').innerHTML += ` ${emoji}`;
