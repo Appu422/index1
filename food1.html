@@ -3,46 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>food delivery app</title>
+    <title>Food Delivery App</title>
     <link rel="stylesheet" href="food1.css">
 </head>
 <body>
     <header>
-        <h1>food delivery app</h1>
+        <h1>Food Delivery App</h1>
         <button onclick="locationFunction()">Location</button>
         <button onclick="contactFunction()">Contact</button>
     </header>
+
     <main>
-        <div class="profile">
-            <h2>User Profile</h2>
-            <p>Name: <span id="userName">John</span></p>
-            <p>Email: <span id="userEmail">john@example.com</span></p>
-        </div>
-        <div class="delivery-method">
-            <h2>Select Delivery Method</h2>
-            <select id="deliverySelect">
-                <option value="home">Home Delivery</option>
-            </select>
-        </div>
-        <div class="filter-sort">
-            <button onclick="filterFunction()">Filter</button>
-            <button onclick="sortFunction('asc')">Sort By Ascending</button>
-            <button onclick="sortFunction('desc')">Sort By Descending</button>
-            <button onclick="ratingFunction()">Rating</button>
-            <button onclick="offerFunction()">Offers</button>
-        </div>
-        <div class="food-items">
-            <!-- Food items will be added here -->
-        </div>
-        <div class="cart">
-            <h2>Cart</h2>
-            <div class="cart-items">
-                <!-- Cart items will be added here -->
+        <section id="authSection">
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <button onclick="showRegister()">Register</button></p>
+        </section>
+
+        <section id="registerSection" style="display: none;">
+            <h2>Register</h2>
+            <form id="registrationForm" onsubmit="register(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <button onclick="showLogin()">Login</button></p>
+        </section>
+
+        <div id="mainContent" style="display: none;">
+            <div class="profile">
+                <h2>User Profile</h2>
+                <p>Name: <span id="userName"></span></p>
+                <p>Email: <span id="userEmail"></span></p>
             </div>
-            <div class="total-price">Total Price: $0</div>
-            <button onclick="checkoutFunction()">Checkout</button>
+            <div class="delivery-method">
+                <h2>Select Delivery Method</h2>
+                <select id="deliverySelect">
+                    <option value="home">Home Delivery</option>
+                </select>
+            </div>
+            <div class="filter-sort">
+                <button onclick="filterFunction()">Filter</button>
+                <button onclick="sortFunction('asc')">Sort By Ascending</button>
+                <button onclick="sortFunction('desc')">Sort By Descending</button>
+                <button onclick="ratingFunction()">Rating</button>
+                <button onclick="offerFunction()">Offers</button>
+            </div>
+            <div class="food-items">
+                <!-- Food items will be added here -->
+            </div>
+            <div class="cart">
+                <h2>Cart</h2>
+                <div class="cart-items">
+                    <!-- Cart items will be added here -->
+                </div>
+                <div class="total-price">Total Price: $0</div>
+                <button onclick="checkoutFunction()">Checkout</button>
+            </div>
         </div>
     </main>
+
     <script src="food1.js"></script>
+    <script>
+        let users = [];
+
+        function register(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            users.push({ username, password });
+            alert('Registration successful! You can now log in.');
+            document.getElementById('registrationForm').reset();
+            showLogin();
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                document.getElementById('userName').textContent = username; // Display username
+                document.getElementById('userEmail').textContent = `${username}@example.com`; // Placeholder email
+                alert('Login successful!');
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('registerSection').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            } else {
+                alert('Invalid username or password!');
+            }
+
+            document.getElementById('loginForm').reset();
+        }
+
+        function showRegister() {
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('registerSection').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('registerSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
