@@ -61,7 +61,7 @@
                 <div class="cart-items">
                     <!-- Cart items will be added here -->
                 </div>
-                <div class="total-price">Total Price: $0</div>
+                <div class="total-price">Total Price:0</div>
                 <button onclick="checkoutFunction()">Checkout</button>
             </div>
         </div>
@@ -91,7 +91,7 @@
 
             if (user) {
                 document.getElementById('userName').textContent = username; // Display username
-                document.getElementById('userEmail').textContent = `${username}@example.com`; // Placeholder email
+                document.getElementById('userEmail').textContent = `{username}@example.com`; // Placeholder email
                 alert('Login successful!');
                 document.getElementById('authSection').style.display = 'none';
                 document.getElementById('registerSection').style.display = 'none';
