@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #f1f1f1;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #ff1a1a;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>My To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a new task...">
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    // Retrieve existing tasks from localStorage
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    // Function to render tasks on the page
+    function renderTasks() {
+      taskList.innerHTML = ''; // Clear the task list
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = ${task} <button class="remove-btn" onclick="removeTask(${index})">Remove</button>;
+        taskList.appendChild(li);
+      });
+    }
+
+    // Add a new task when pressing Enter key
+    taskInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && taskInput.value.trim()) {
+        tasks.push(taskInput.value.trim());  // Add new task to array
+        localStorage.setItem('tasks', JSON.stringify(tasks)); // Save tasks to localStorage
+        taskInput.value = ''; // Clear input field
+        renderTasks(); // Re-render the task list
+      }
+    });
+
+    // Remove a task
+    function removeTask(index) {
+      tasks.splice(index, 1); // Remove task from array
+      localStorage.setItem('tasks', JSON.stringify(tasks)); // Update localStorage
+      renderTasks(); // Re-render the task list
+    }
+
+    // Initial render when page loads
+    renderTasks();
+  </script>
+
+</body>
+</html>
