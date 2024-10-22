@@ -114,4 +114,4 @@ function displayOrderHistory() {
             <p><strong>Date:</strong> ${order.date}</p>
             <hr>
         `;
-        historyContainer.appendChild(order
+        historyContainer.appendChild(order)
