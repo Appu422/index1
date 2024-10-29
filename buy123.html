@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifieds: Buy & Sell Used Products</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 10px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        /* Search bar and Category filters */
+        .search-bar {
+            background-color: #f0f0f0;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .search-bar input, .search-bar select, .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            width: 220px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .product-card .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        .product-card button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .product-card button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal input, .modal select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            font-size: 16px;
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .modal button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>░BUY AND SELL Classifieds</h1>
+        <nav>
+            <a href="#">Buy Products</a>
+            <a href="#">Sell Products</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+        <input type="text" id="search-bar" placeholder="Search for products...">
+        <select id="category-filter">
+            <option value="all">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="cars">Cars</option>
+            <option value="home">Home Appliances</option>
+            <option value="clothing">Clothing</option>
+            <option value="footwear">Footwear</option>
+            <option value="furniture">Furniture</option>
+            <option value="sports">Sports Equipment</option>
+        </select>
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <!-- Product List -->
+    <section class="product-list" id="product-list">
+        <!-- Sample Products -->
+        <div class="product-card" data-category="electronics">
+            <img src="iphone 16.jpg" alt="iPhone 16">
+            <h3>iPhone 16</h3>
+            <p class="price"> ₹70,000</p>
+            <p>Used, excellent condition</p>
+            <button onclick="buyProduct('iPhone 16')">Buy</button>
+        </div>
+        <div class="product-card" data-category=""
+        
+        <div class="product-card" data-category="cars">
+            <img src="LAMBOGHNIN.jpg" alt="LAMBORGHINI">
+            <h3>LAMBORGHINI</h3>
+            <p class="price">₹30,00000</p>
+            <p>2017 model, used</p>
+            <button onclick="buyProduct('LAMBORGHINI')">Buy</button>
+        </div>
+
+        <div class="product-card" data-category="clothing">
+            <img src="lather.jpg" alt="Jacket">
+            <h3>Leather Jacket</h3>
+            <p class="price">₹3000</p>
+            <p>Black, medium size, like new</p>
+            <button onclick="buyProduct('Leather Jacket')">Buy</button>
+        </div>
+
+        <div class="product-card" data-category="footwear">
+            <img src="puma.jpg" alt="PUMA Shoes">
+            <h3>PUMA Shoes</h3>
+            <p class="price">₹1999</p>
+            <p>Size 10, used, good condition</p>
+            <button onclick="buyProduct('PUMA Shoes')">Buy</button>
+        </div>
+
+       
+        <div class="product-card" data-category="electronics">
+            <img src="hp laptop.jpg" alt="HP LaptOP">
+            <h3>Dell XPS 13</h3>
+            <p class="price">₹49,999</p>
+            <p>Used, great condition</p>
+            <button onclick="buyProduct('Dell XPS 13')">Buy</button>
+        </div>
+
+        <div class="product-card" data-category="electronics">
+            <img src="micro oven.jpg" alt="Micro oven">
+            <h3>Micro oven</h3>
+            <p class="price">₹9,999</p>
+            <p>5.3 connectivity, lightly used</p>
+            <button onclick="buyProduct('Micro oven')">Buy</button>
+        </div>
+        <div class="product-card" data-category="Furniture">
+            <img src="DINNING TABLE SET.jpg" alt="dining table set">
+            <h3>Dining table set</h3>
+            <p class="price">₹12,999</p>
+            <p>wooden,portable, great condition</p>
+            <button onclick="buyProduct('Dining table set')">Buy</button>
+        </div>
+         <div class="product-card" data-category="electronics">
+            <img src="Samsung 55'' 4k tv.jpg" alt="samsung 55'' 4k tv">
+            <h3>Samsung 55'' 4k tv</h3>
+            <p class="price">₹65,999</p>
+            <p>Used,led, great condition</p>
+            <button onclick="buyProduct('Samsung 55'' 4k tv')">Buy</button>
+        </div>
+         <div class="product-card" data-category="Bike">
+            <img src="rx 100.jpg" alt="RX 100">
+            <h3>RX 100</h3>
+            <p class="price">₹19,000</p>
+            <p>light weight, good condition</p>
+            <button onclick="buyProduct('RX 100')">Buy</button>
+        </div>
+         <div class="product-card" data-category="electronics">
+            <img src="washing machine.jpg" alt="WASHING MACHINE">
+            <h3>WASHING MACHINE</h3>
+            <p class="price">₹50000</p>
+            <p>Used, great condition</p>
+            <button onclick="buyProduct('WASHING MACHINE')">Buy</button>
+        </div>
+         <div class="product-card" data-category="Home appliances">
+            <img src="kettle.jpg" alt="kettle">
+            <h3>KETTLE</h3>
+            <p class="price">₹900</p>
+            <p>Used, great condition</p>
+            <button onclick="buyProduct('kettle')">Buy</button>
+        </div>
+         <div class="product-card" data-category="Clock">
+            <img src="fastrack.jpg" alt="Fasttrack watch">
+            <h3>Fasttrack watch</h3>
+            <p class="price">₹2,999</p>
+            <p>Used, great condition</p>
+            <button onclick="buyProduct('Fasttrack watch')">Buy</button>
+        </div>
+
+    
+        <div class="product-card" data-category="home appliances">
+            <img src="vaccum.jpg" alt="Vacuum Cleaner">
+            <h3>Vacuum Cleaner</h3>
+            <p class="price">₹4500</p>
+            <p>Used, great condition</p>
+            <button onclick="buyProduct('Vacuum Cleaner')">Buy</button>
+        </div>
+
+        <div class="product-card" data-category="cars">
+            <img src="tesla.jpg" alt="TESLA">
+            <h3>TESLA</h3>
+            <p class="price">₹13 lakhs</p>
+            <p>Used, excellent condition</p>
+            <button onclick="buyProduct('TESLA')">Buy</button>
+        </div>
+    </section>
+
+    <!-- Modal for Customer Details -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Customer Details</h2>
+            <form id="customer-details-form">
+                <label for="customer-name">Name:</label>
+                <input type="text" id="customer-name" required>
+
+                <label for="customer-email">Email:</label>
+                <input type="email" id="customer-email" required>
+
+                <label for="customer-address">Address:</label>
+                <input type="text" id="customer-address" required>
+
+                <label for="customer-phone">Phone Number:</label>
+                <input type="tel" id="customer-phone" required>
+
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" required>
+                    <option value="">Select payment method</option>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank-transfer">Bank Transfer</option>
+                </select>
+
+                <button type="submit">Confirm Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ░
+            <h1>░BUY AND SELL  Classifieds. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function buyProduct(productName) {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "block";
+    
+            document.getElementById("customer-details-form").onsubmit = function(event) {
+                event.preventDefault();
+                alert(`Thank you for your purchase of ${productName}!
+    Name: ${document.getElementById("customer-name").value}
+    Email: ${document.getElementById("customer-email").value}
+    Address: ${document.getElementById("customer-address").value}
+    Phone: ${document.getElementById("customer-phone").value}
+    Payment Method: ${document.getElementById("payment-method").value}`);
+                closeModal();
+            };
+        }
+    
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            document.getElementById("customer-details-form").reset();
+        }
+    
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+    
+        // Implement search functionality (you can enhance this logic)
+        function searchProducts() {
+            const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+            const selectedCategory = document.getElementById("category-filter").value;
+    
+            const products = document.querySelectorAll(".product-card");
+            products.forEach(product => {
+                const productName = product.querySelector("h3").textContent.toLowerCase();
+                const productCategory = product.getAttribute("data-category");
+    
+                const matchesSearch = productName.includes(searchTerm);
+                const matchesCategory = selectedCategory === "all" || productCategory === selectedCategory;
+    
+                if (matchesSearch && matchesCategory) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>
