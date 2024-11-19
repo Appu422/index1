@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <link rel="stylesheet" href="leave.css">
+</head>
+<body>
+    <header>
+        <h1>Leave Management System</h1>
+        <nav>
+            <a href="#" data-page="login">Login</a>
+            <a href="#" data-page="signup">Signup</a>
+            <a href="#" data-page="applyLeave">Apply Leave</a>
+            <a href="#" data-page="dashboard">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Login Section -->
+        <section id="login" data-page="login">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" required>
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <!-- Signup Section -->
+        <section id="signup" data-page="signup" style="display: none;">
+            <h2>Signup</h2>
+            <form id="signupForm">
+                <label for="signupName">Name:</label>
+                <input type="text" id="signupName" required>
+
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" required>
+
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" required>
+
+                <button type="submit">Signup</button>
+            </form>
+        </section>
+
+        <!-- Apply Leave Section -->
+        <section id="applyLeave" data-page="applyLeave" style="display: none;">
+            <h2>Apply for Leave</h2>
+            <form id="leaveForm">
+                <label for="leaveType">Leave Type:</label>
+                <select id="leaveType" required>
+                    <option value="sick">Sick Leave</option>
+                    <option value="casual">Casual Leave</option>
+                    <option value="annual">Annual Leave</option>
+                </select>
+
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" required>
+
+                <label for="reason">Reason for Leave:</label>
+                <textarea id="reason" rows="4" required></textarea>
+
+                <button type="submit">Apply Leave</button>
+            </form>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" data-page="dashboard" style="display: none;">
+            <h2>Your Leave Requests</h2>
+            <p>Leave Balance: <span id="leaveBalance">20</span> days</p>
+            <div id="leaveRequests"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Leave Management System</p>
+    </footer>
+
+    <script src="leave.js"></script>
+</body>
+</html>
